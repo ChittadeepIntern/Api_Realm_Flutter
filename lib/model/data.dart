@@ -3,22 +3,22 @@ import 'dart:core';
 import 'package:api_realm/model/person.dart';
 
 class DataModel {
-  List<PersonModel>? l1ImamAliAs;
-  List<PersonModel>? sahifaSajjadia;
+  List<AlbumModel>? l1ImamAliAs;
+  List<AlbumModel>? sahifaSajjadia;
 
   DataModel({this.l1ImamAliAs, this.sahifaSajjadia});
 
   DataModel.fromJson(Map<String, dynamic> json) {
     if (json['1 Imam Ali(as)'] != null) {
-      l1ImamAliAs = <PersonModel>[];
+      l1ImamAliAs = <AlbumModel>[];
       json['1 Imam Ali(as)'].forEach((v) {
-        l1ImamAliAs!.add(PersonModel.fromJson(v));
+        l1ImamAliAs!.add(AlbumModel.fromJson(v));
       });
     }
     if (json['Sahifa Sajjadia'] != null) {
-      sahifaSajjadia = <PersonModel>[];
+      sahifaSajjadia = <AlbumModel>[];
       json['Sahifa Sajjadia'].forEach((v) {
-        sahifaSajjadia!.add(PersonModel.fromJson(v));
+        sahifaSajjadia!.add(AlbumModel.fromJson(v));
       });
     }
   }

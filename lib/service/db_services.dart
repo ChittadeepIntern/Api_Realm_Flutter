@@ -2,45 +2,26 @@ import 'dart:developer';
 
 import 'package:api_realm/entities/entities.dart';
 import 'package:api_realm/model/data.dart';
+import 'package:api_realm/utils/helper_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
 
 class DbServices {
+  static final DbServices _instance = DbServices._initernal();
+
+  static DbServices get instance => _instance;
+
   late Realm realm;
 
-  DbServices() {
+  DbServices._initernal() {
     final config = Configuration.local(
-        [Data.schema, Person.schema, Lyrics.schema, Cdata.schema]);
+        [Data.schema, Album.schema, Lyrics.schema, Cdata.schema]);
     realm = Realm(config);
   }
 
   void write(DataModel dataModel) {
     realm.write(() {
-      var data = Data(
-          l1ImamAliAs: (dataModel.l1ImamAliAs?.map((element) => Person(
-                      element.id,
-                      cat: element.cat,
-                      cdata: element.cdata!.map((cdata) => Cdata(
-                          type: cdata.type,
-                          audiourl: cdata.audiourl,
-                          islrc: cdata.islrc,
-                          lyrics: cdata.lyrics!.map((lyric) => Lyrics(
-                              time: lyric.time,
-                              arabic: lyric.arabic,
-                              translation: lyric.translation,
-                              translitration: lyric.translitration)))),
-                      isfav: element.isfav,
-                      title: element.title)) ??
-                  [])
-              .cast(),
-          sahifaSajjadia: (dataModel.sahifaSajjadia?.map((element) =>
-                      Person(element.id, cat: element.cat, cdata: element.cdata!.map((cdata) => Cdata(type: cdata.type, audiourl: cdata.audiourl, islrc: cdata.islrc, lyrics: cdata.lyrics!.map((lyric) => Lyrics(time: lyric.time, arabic: lyric.arabic, translation: lyric.translation, translitration: lyric.translitration)))), isfav: element.isfav, title: element.title)) ??
-                  [])
-              .cast());
-
-      /// have to fix the code above
-
-      return realm.add(data);
+      return realm.add(HelperMethods.convertDataModelToData(dataModel));
     });
   }
 
@@ -52,4 +33,18 @@ class DbServices {
             sahifaSajjadia: element.sahifaSajjadia))
         .first;
   }
+
+  bool dataExists() {
+    return realm
+        .all<Data>()
+        .map((element) => Data(
+            l1ImamAliAs: element.l1ImamAliAs,
+            sahifaSajjadia: element.sahifaSajjadia))
+        .isNotEmpty;
+  }
+
+  /*Future<void> assignOfflineSongPathUpdate(
+      String category, String album, String newPath) {
+    realm.all<Data>().where((element) => element.== 'category');
+  }*/
 }

@@ -1,15 +1,15 @@
 import 'package:api_realm/model/cdata.dart';
 
-class PersonModel {
+class AlbumModel {
   String? cat;
   int? id;
   String? title;
   String? isfav;
   List<CdataModel>? cdata;
 
-  PersonModel({this.cat, this.id, this.title, this.isfav, this.cdata});
+  AlbumModel({this.cat, this.id, this.title, this.isfav, this.cdata});
 
-  PersonModel.fromJson(Map<String, dynamic> json) {
+  AlbumModel.fromJson(Map<String, dynamic> json) {
     cat = json['cat'];
     id = json['id'];
     title = json['title'];

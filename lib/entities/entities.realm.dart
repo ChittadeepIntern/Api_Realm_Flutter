@@ -9,29 +9,29 @@ part of 'entities.dart';
 // ignore_for_file: type=lint
 class Data extends _Data with RealmEntity, RealmObjectBase, RealmObject {
   Data({
-    Iterable<Person> l1ImamAliAs = const [],
-    Iterable<Person> sahifaSajjadia = const [],
+    Iterable<Album> l1ImamAliAs = const [],
+    Iterable<Album> sahifaSajjadia = const [],
   }) {
-    RealmObjectBase.set<RealmList<Person>>(
-        this, 'l1ImamAliAs', RealmList<Person>(l1ImamAliAs));
-    RealmObjectBase.set<RealmList<Person>>(
-        this, 'sahifaSajjadia', RealmList<Person>(sahifaSajjadia));
+    RealmObjectBase.set<RealmList<Album>>(
+        this, 'l1ImamAliAs', RealmList<Album>(l1ImamAliAs));
+    RealmObjectBase.set<RealmList<Album>>(
+        this, 'sahifaSajjadia', RealmList<Album>(sahifaSajjadia));
   }
 
   Data._();
 
   @override
-  RealmList<Person> get l1ImamAliAs =>
-      RealmObjectBase.get<Person>(this, 'l1ImamAliAs') as RealmList<Person>;
+  RealmList<Album> get l1ImamAliAs =>
+      RealmObjectBase.get<Album>(this, 'l1ImamAliAs') as RealmList<Album>;
   @override
-  set l1ImamAliAs(covariant RealmList<Person> value) =>
+  set l1ImamAliAs(covariant RealmList<Album> value) =>
       throw RealmUnsupportedSetError();
 
   @override
-  RealmList<Person> get sahifaSajjadia =>
-      RealmObjectBase.get<Person>(this, 'sahifaSajjadia') as RealmList<Person>;
+  RealmList<Album> get sahifaSajjadia =>
+      RealmObjectBase.get<Album>(this, 'sahifaSajjadia') as RealmList<Album>;
   @override
-  set sahifaSajjadia(covariant RealmList<Person> value) =>
+  set sahifaSajjadia(covariant RealmList<Album> value) =>
       throw RealmUnsupportedSetError();
 
   @override
@@ -67,9 +67,9 @@ class Data extends _Data with RealmEntity, RealmObjectBase, RealmObject {
     register(_toEJson, _fromEJson);
     return const SchemaObject(ObjectType.realmObject, Data, 'Data', [
       SchemaProperty('l1ImamAliAs', RealmPropertyType.object,
-          linkTarget: 'Person', collectionType: RealmCollectionType.list),
+          linkTarget: 'Album', collectionType: RealmCollectionType.list),
       SchemaProperty('sahifaSajjadia', RealmPropertyType.object,
-          linkTarget: 'Person', collectionType: RealmCollectionType.list),
+          linkTarget: 'Album', collectionType: RealmCollectionType.list),
     ]);
   }();
 
@@ -77,8 +77,8 @@ class Data extends _Data with RealmEntity, RealmObjectBase, RealmObject {
   SchemaObject get objectSchema => RealmObjectBase.getSchema(this) ?? schema;
 }
 
-class Person extends _Person with RealmEntity, RealmObjectBase, RealmObject {
-  Person(
+class Album extends _Album with RealmEntity, RealmObjectBase, RealmObject {
+  Album(
     int? id, {
     String? cat,
     String? title,
@@ -93,7 +93,7 @@ class Person extends _Person with RealmEntity, RealmObjectBase, RealmObject {
         this, 'cdata', RealmList<Cdata>(cdata));
   }
 
-  Person._();
+  Album._();
 
   @override
   String? get cat => RealmObjectBase.get<String>(this, 'cat') as String?;
@@ -123,15 +123,15 @@ class Person extends _Person with RealmEntity, RealmObjectBase, RealmObject {
       throw RealmUnsupportedSetError();
 
   @override
-  Stream<RealmObjectChanges<Person>> get changes =>
-      RealmObjectBase.getChanges<Person>(this);
+  Stream<RealmObjectChanges<Album>> get changes =>
+      RealmObjectBase.getChanges<Album>(this);
 
   @override
-  Stream<RealmObjectChanges<Person>> changesFor([List<String>? keyPaths]) =>
-      RealmObjectBase.getChangesFor<Person>(this, keyPaths);
+  Stream<RealmObjectChanges<Album>> changesFor([List<String>? keyPaths]) =>
+      RealmObjectBase.getChangesFor<Album>(this, keyPaths);
 
   @override
-  Person freeze() => RealmObjectBase.freezeObject<Person>(this);
+  Album freeze() => RealmObjectBase.freezeObject<Album>(this);
 
   EJsonValue toEJson() {
     return <String, dynamic>{
@@ -143,14 +143,14 @@ class Person extends _Person with RealmEntity, RealmObjectBase, RealmObject {
     };
   }
 
-  static EJsonValue _toEJson(Person value) => value.toEJson();
-  static Person _fromEJson(EJsonValue ejson) {
+  static EJsonValue _toEJson(Album value) => value.toEJson();
+  static Album _fromEJson(EJsonValue ejson) {
     if (ejson is! Map<String, dynamic>) return raiseInvalidEJson(ejson);
     return switch (ejson) {
       {
         'id': EJsonValue id,
       } =>
-        Person(
+        Album(
           fromEJson(ejson['id']),
           cat: fromEJson(ejson['cat']),
           title: fromEJson(ejson['title']),
@@ -162,9 +162,9 @@ class Person extends _Person with RealmEntity, RealmObjectBase, RealmObject {
   }
 
   static final schema = () {
-    RealmObjectBase.registerFactory(Person._);
+    RealmObjectBase.registerFactory(Album._);
     register(_toEJson, _fromEJson);
-    return const SchemaObject(ObjectType.realmObject, Person, 'Person', [
+    return const SchemaObject(ObjectType.realmObject, Album, 'Album', [
       SchemaProperty('cat', RealmPropertyType.string, optional: true),
       SchemaProperty('id', RealmPropertyType.int,
           optional: true, primaryKey: true),
@@ -183,11 +183,13 @@ class Cdata extends _Cdata with RealmEntity, RealmObjectBase, RealmObject {
   Cdata({
     String? type,
     String? audiourl,
+    String? offlineAudioPath,
     Iterable<Lyrics> lyrics = const [],
     bool? islrc,
   }) {
     RealmObjectBase.set(this, 'type', type);
     RealmObjectBase.set(this, 'audiourl', audiourl);
+    RealmObjectBase.set(this, 'offlineAudioPath', offlineAudioPath);
     RealmObjectBase.set<RealmList<Lyrics>>(
         this, 'lyrics', RealmList<Lyrics>(lyrics));
     RealmObjectBase.set(this, 'islrc', islrc);
@@ -205,6 +207,13 @@ class Cdata extends _Cdata with RealmEntity, RealmObjectBase, RealmObject {
       RealmObjectBase.get<String>(this, 'audiourl') as String?;
   @override
   set audiourl(String? value) => RealmObjectBase.set(this, 'audiourl', value);
+
+  @override
+  String? get offlineAudioPath =>
+      RealmObjectBase.get<String>(this, 'offlineAudioPath') as String?;
+  @override
+  set offlineAudioPath(String? value) =>
+      RealmObjectBase.set(this, 'offlineAudioPath', value);
 
   @override
   RealmList<Lyrics> get lyrics =>
@@ -233,6 +242,7 @@ class Cdata extends _Cdata with RealmEntity, RealmObjectBase, RealmObject {
     return <String, dynamic>{
       'type': type.toEJson(),
       'audiourl': audiourl.toEJson(),
+      'offlineAudioPath': offlineAudioPath.toEJson(),
       'lyrics': lyrics.toEJson(),
       'islrc': islrc.toEJson(),
     };
@@ -244,6 +254,7 @@ class Cdata extends _Cdata with RealmEntity, RealmObjectBase, RealmObject {
     return Cdata(
       type: fromEJson(ejson['type']),
       audiourl: fromEJson(ejson['audiourl']),
+      offlineAudioPath: fromEJson(ejson['offlineAudioPath']),
       lyrics: fromEJson(ejson['lyrics'], defaultValue: const []),
       islrc: fromEJson(ejson['islrc']),
     );
@@ -255,6 +266,8 @@ class Cdata extends _Cdata with RealmEntity, RealmObjectBase, RealmObject {
     return const SchemaObject(ObjectType.realmObject, Cdata, 'Cdata', [
       SchemaProperty('type', RealmPropertyType.string, optional: true),
       SchemaProperty('audiourl', RealmPropertyType.string, optional: true),
+      SchemaProperty('offlineAudioPath', RealmPropertyType.string,
+          optional: true),
       SchemaProperty('lyrics', RealmPropertyType.object,
           linkTarget: 'Lyrics', collectionType: RealmCollectionType.list),
       SchemaProperty('islrc', RealmPropertyType.bool, optional: true),
