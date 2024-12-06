@@ -43,8 +43,22 @@ class DbServices {
         .isNotEmpty;
   }
 
-  /*Future<void> assignOfflineSongPathUpdate(
-      String category, String album, String newPath) {
-    realm.all<Data>().where((element) => element.== 'category');
-  }*/
+  void assignOfflineSongPathUpdate(
+      {required String category,
+      required int id,
+      required String title,
+      required String cdataType,
+      required String offlineAudioPath}) {
+    realm.write(() {
+      final Album albumObject = realm
+          .query<Album>('cat =="$category" AND id = $id AND title == "$title"')
+          .first;
+
+      // Find the specific CData object within the cdata array
+      final cdataItem =
+          albumObject.cdata.firstWhere((item) => item.type == cdataType);
+
+      cdataItem.offlineAudioPath = offlineAudioPath;
+    });
+  }
 }

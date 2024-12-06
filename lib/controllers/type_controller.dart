@@ -19,7 +19,7 @@ class TypeController extends GetxController {
 
       log("data downloaded in $path");
 
-      //DbServices.instance.assignOfflineSongPathUpdate(category, album, newPath)
+      //DbServices.instance.assignOfflineSongPathUpdate(category: )
     }
     super.onInit();
   }

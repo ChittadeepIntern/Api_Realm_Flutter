@@ -16,7 +16,7 @@ class AlbumScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            Get.to(() => SongScreen(cdata: albums[index].cdata));
+            Get.to(() => SongScreen(album: albums[index]));
           },
           child: ListTile(
             title: Text(albums[index].title ?? 'Title not found'),

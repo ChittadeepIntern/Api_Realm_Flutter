@@ -5,26 +5,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SongScreen extends StatelessWidget {
-  const SongScreen({super.key, required this.cdata});
+  const SongScreen({super.key, required this.album});
 
-  final List<Cdata> cdata;
+  final Album album;
 
   @override
   Widget build(BuildContext context) {
-    
-
     return DefaultTabController(
         length: 3, // Number of tabs
         child: Scaffold(
-          appBar: AppBar(title: Text("Song"),
+          appBar: AppBar(
+            title: const Text("Song"),
             bottom: TabBar(
-                tabs: List.generate(cdata.length, (index) {
-              return Tab(text: cdata[index].type);
+                tabs: List.generate(album.cdata.length, (index) {
+              return Tab(text: album.cdata[index].type);
             })),
           ),
           body: TabBarView(
-            children: List.generate(cdata.length, (index) {
-              return Types(cdata: cdata[index]);
+            children: List.generate(album.cdata.length, (index) {
+              return Types(cdata: album.cdata[index]);
             }),
           ),
         ));
