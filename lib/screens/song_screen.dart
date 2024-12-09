@@ -23,7 +23,7 @@ class SongScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: List.generate(album.cdata.length, (index) {
-              return Types(cdata: album.cdata[index]);
+              return Types(album: album, cdata: album.cdata[index]);
             }),
           ),
         ));

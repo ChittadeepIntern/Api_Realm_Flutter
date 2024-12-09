@@ -57,7 +57,6 @@ class ApiServices {
           }
         },
       );
-      log("data successfullly downloaded in $savePath");
       return savePath;
     } catch (e) {
       log('downolading issue $e');

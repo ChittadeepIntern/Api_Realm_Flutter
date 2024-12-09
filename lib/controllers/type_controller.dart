@@ -8,8 +8,14 @@ import 'package:get/get.dart';
 
 class TypeController extends GetxController {
   late final Cdata cdata;
+  late final Album album;
 
-  TypeController(this.cdata);
+  late final offlineAudioPath;
+
+  TypeController({
+    required this.album,
+    required this.cdata,
+  });
 
   @override
   Future<void> onInit() async {
@@ -19,7 +25,18 @@ class TypeController extends GetxController {
 
       log("data downloaded in $path");
 
-      //DbServices.instance.assignOfflineSongPathUpdate(category: )
+      if (path != null) {
+        DbServices.instance.assignOfflineSongPath(
+            category: album.cat!,
+            id: album.id!,
+            title: album.title!,
+            cdataType: cdata.type!,
+            offlineAudioPath: path);
+
+        log("data successfully written in db");
+      }
+    } else {
+      log("Audio Url is already saved or not it is a translation");
     }
     super.onInit();
   }

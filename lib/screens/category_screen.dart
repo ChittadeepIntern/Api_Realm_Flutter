@@ -16,9 +16,6 @@ class CategoryScreen extends StatelessWidget {
         init: DataController(),
         builder: (controller) {
           // Ensure data is not null before rendering
-          if (controller.data == null) {
-            return const Center(child: CircularProgressIndicator());
-          }
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

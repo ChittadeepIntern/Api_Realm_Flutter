@@ -17,7 +17,7 @@ class AlbumModel {
     if (json['cdata'] != null) {
       cdata = <CdataModel>[];
       json['cdata'].forEach((v) {
-        cdata!.add(new CdataModel.fromJson(v));
+        cdata!.add(CdataModel.fromJson(v));
       });
     }
   }
